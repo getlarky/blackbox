@@ -301,13 +301,13 @@ function shred_file() {
   local OPT
   name="$1"
 
-  if which shred >/dev/null 2>/dev/null ; then
-    CMD=shred
-    OPT=-u
-  elif which srm >/dev/null 2>/dev/null ; then
+  if which srm >/dev/null 2>/dev/null ; then
     #NOTE: srm by default uses 35-pass Gutmann algorithm
     CMD=srm
     OPT=-f
+  elif which shred >/dev/null 2>/dev/null ; then
+    CMD=shred
+    OPT=-u
   elif _F=$(mktemp); rm -P "${_F}" >/dev/null 2>/dev/null ; then
     CMD=rm
     OPT=-Pf
